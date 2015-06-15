@@ -1,0 +1,153 @@
+{
+    "templateId": 3,
+    "templateVars": {
+        "startTitle": {
+            "type": "DIRECTDATA",
+            "desc": "开始游戏之前的标题",
+            "value": "抢粽子大赛",
+            "name": "startTitle"
+        },
+        "startContent": {
+            "type": "STRING",
+            "desc": "开始游戏前的内容",
+            "variables": [
+                "number"
+            ],
+            "value": "   快动动你的手指抢粽子吧，数量有限，不要点到空白地方哦~~~%d秒内看你能抢到多少个粽子。快开始吧！",
+            "name": "startContent"
+        },
+        "resultTitle": {
+            "type": "STRING",
+            "desc": "游戏结束页面的标题",
+            "variables": [
+                "score"
+            ],
+            "value": "哇偶,你竟然抢了\n%d个粽子，不错不错~~~",
+            "name": "resultTitle"
+        },
+        "resultContent": {
+            "type": "STRING",
+            "desc": "",
+            "variables": [
+                "number"
+            ],
+            "value": "兄弟，还得加油哦~~隔壁妹子都比你多%d分哦！",
+            "name": "resultContent"
+        },
+        "shareBefore": {
+            "type": "STRING",
+            "desc": "开始游戏前的分享内容",
+            "value": "端午节快到了，赶紧过来抢粽子吧~~",
+            "name": "shareBefore"
+        },
+        "shareAfter": {
+            "type": "STRING",
+            "desc": "完成游戏后的分享内容",
+            "variables": [
+                "number"
+            ],
+            "value": "我竟然抢了\n%d个粽子，太开心啦，哈哈哈~~~",
+            "name": "shareAfter"
+        },
+        "bgColor": {
+            "type": "DIRECTDATA",
+            "desc": "游戏背景颜色",
+            "value": "#000",
+            "name": "bgColor"
+        },
+        "blockColor": {
+            "type": "DIRECTDATA",
+            "desc": "白块颜色",
+            "value": "#ffffff",
+            "name": "blockColor"
+        },
+        "downSpeed": {
+            "type": "DIRECTDATA",
+            "desc": "白块下滑的速度",
+            "value": 1000,
+            "name": "downSpeed"
+        },
+        "numPerLine": {
+            "type": "DIRECTDATA",
+            "desc": "每行有多少个白块",
+            "value": 4,
+            "name": "numPerLine"
+        },
+        "linePerScreen": {
+            "type": "DIRECTDATA",
+            "desc": "一个屏幕显示多少行白块",
+            "value": 5,
+            "name": "linePerScreen"
+        },
+        "gameTime": {
+            "type": "DIRECTDATA",
+            "desc": "游戏时间",
+            "value": 30,
+            "name": "gameTime"
+        },
+        "block_normal": {
+            "type": "IMAGE",
+            "texUrl": "res/mm_normal.png",
+            "originW": 79,
+            "originH": 80,
+            "scale": 1,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "name": "block_normal"
+        },
+        "block_sel": {
+            "type": "IMAGE",
+            "texUrl": "res/mm_sel.png",
+            "originW": 79,
+            "originH": 80,
+            "scale": 1,
+            "anchorX": 0.5,
+            "anchorY": 0.5,
+            "name": "block_sel"
+        },
+        "back": {
+            "type": "IMAGE",
+            "texUrl": "res/back.jpg",
+            "originW": 640,
+            "originH": 1136,
+            "scale": 1,
+            "anchorX": 0.0,
+            "anchorY": 0.0,
+            "name": "back"
+        }
+    },
+    "scenes": {
+        "Game": {
+            "background": null,
+            "cat_attack": null,
+            "cat_idle": null,
+            "cat_dead": null,
+            "cat_walk": null,
+            "doge_attack": null,
+            "doge_charge": null,
+            "doge_dead": null,
+            "doge_hurt": null,
+            "doge_walk": null,
+            "husky_attack": null,
+            "husky_charge": null,
+            "husky_dead": null,
+            "husky_hurt": null,
+            "husky_walk": null
+        },
+        "EndUI": {
+            "win_label": {
+                "fillStyle": "#000",
+                "fontSize": 20
+            }
+        },
+        "ShareUI": {}
+    },
+    "share": {
+        "wechat": {
+            "appId": "",
+            "imgUrl": "icon.png",
+            "desc": "端午节快到了，赶紧过来抢粽子吧",
+            "title": "端午节抢粽子大赛"
+        }
+    }
+}

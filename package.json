@@ -1,0 +1,18 @@
+{
+  "name": "huodong",
+  "description": "huodong",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "co": "*",
+    "co-body": "*",
+    "debug": "*",
+    "koa": "*",
+    "koa-static":"*",
+    "koa-router":"*",
+    "socket.io":"*"
+  }
+}
