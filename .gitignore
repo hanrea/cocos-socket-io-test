@@ -70,4 +70,3 @@ tools/faketime
 
 node_modules/
 .idea/
-*.html

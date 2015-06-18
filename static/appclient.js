@@ -30,9 +30,8 @@ if(B.v.mobile || B.v.ios || B.v.android || B.v.iPhone || B.v.iPad){
 }
 
 
-var ft = hh('<div style="position:absolute;height:20px;line-height:20px;font:100 12px/20px arial;bottom:0px;z-index:999;width:100%;text-align:center">\
-  <a style="display:none;    position:absolute;left:0px;padding:0px 10px;background:rgba(0,0,0,.2);" href="'+url+'"><svg width="10" height="10" xmlns="http://www.w3.org/2000/svg"><g><line id="svg_1" y2="5" x2="0" y1="0" x1="5" stroke="#ffffff" fill="none"/><line id="svg_2" y2="5" x2="0" y1="10" x1="5" stroke="#ffffff" fill="none"/></g></svg></a>\
-  <a style="color:#fff;" href="'+url+'">安仁科技 提供技术支持</a>\
+var ft = hh('<div style="position:absolute;height:20px;line-height:20px;font:100 10px/28px arial;bottom:0px;z-index:999;width:100%;text-align:center">\
+  <span style="color:#fff;" >安仁科技</span>\
 </div>');
 
 /*

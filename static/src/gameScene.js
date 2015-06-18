@@ -3,6 +3,57 @@
  */
 //
 var  hillscore = 0;//最高成绩
+var opts = {path:"/socket",transports:[ 'websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling'],pingInterval:5000};
+ var socket = io(opts);
+var phone = '';//手机号
+var push = {};
+
+
+var phoneMatch = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/;
+var tmpphone = ''
+while(phone ==''){
+    var title = "请输入领奖通知手机号";
+    if (tmpphone!='' ) { title = "请输入正确的手机号"};
+    tmpphone=prompt(title);
+    if(tmpphone.match(phoneMatch))
+    {
+        phone=tmpphone;
+        push = {
+            phone:tmpphone,
+            score:0
+        }
+        //存cookie
+        socket.emit('login', phone);
+    }
+}
+
+socket.on('init', function (data) {
+    console.log("init");
+    pushNewInfo("欢迎进入游戏，您目前最高抢得 "+data["myScore"]+"个粽子.");
+    pushNewInfo("当前系统最高抢得 "+data["topScore"]+"个粽子.");
+});
+
+socket.on('rank', function (data) {
+    var info = "您本次排名 "+data["curIndex"]+" ,最佳排名"+data["topIndex"]+".";
+    pushNewInfo(info);
+});
+
+socket.on('push', function (data) {
+    var info = data["phone"]+"抢了"+data["score"]+"个粽子。";
+    pushNewInfo(info);
+});
+
+socket.on('join', function (phone) {
+    console.log("用户"+phone+"加入游戏。");
+    var info = "用户"+phone+"加入游戏。";
+    pushNewInfo(info);
+});
+
+function pushNewInfo (info) {
+    $('#gamestate').children().first().remove();
+    $('#gamestate').append("<div>"+info+"</div>");
+}
+
 
 
 var gameLayer = cc.Layer.extend({
@@ -60,13 +111,14 @@ var gameLayer = cc.Layer.extend({
 
         this.scoreLabel = cc.LabelTTF.create(TemplateUtils.getVariable("gameTime"), "Arial", 22);
         this.scoreLabel.setColor(cc.color(199, 100, 255));
-        this.scoreLabel.setPosition(cc.pAdd(cc.visibleRect.top, cc.p(0, -100)));
+        this.scoreLabel.setPosition(cc.pAdd(cc.visibleRect.top, cc.p(0, -250)));
         this.addChild(this.scoreLabel);
         if (!status) {
             this.initStartUI();
         } else {
             this.schedule(this.updateDown);
-        }
+        };
+
     },
     registetBlockListener: function (target) {
         var list = this.getListener();
@@ -237,6 +289,8 @@ var gameLayer = cc.Layer.extend({
     startGame: function () {
         this.resultLayer.removeFromParent(true);
         this.schedule(this.updateDown);
+        $('#gamestate').css({ display: "block"});
+
     },
 
     finishGame: function () {
@@ -245,7 +299,10 @@ var gameLayer = cc.Layer.extend({
         this.resultLayer.setColor(cc.color(121, 178, 97));
         this.addChild(this.resultLayer);
 
-        //
+        //提交成绩
+        push["score"] = this.score;
+        socket.emit('push',push);
+        $('#gamestate').css({display: "none"});
         this.hillscore=hillscore  = this.score > this.hillscore ? this.score :hillscore;
 
         var labelTitle = cc.LabelTTF.create(TemplateUtils.getVariable("resultTitle", {"score": this.score}), "Arial", 22);
@@ -260,7 +317,7 @@ var gameLayer = cc.Layer.extend({
         labelContent.setDimensions(cc.size(cc.winSize.width - 60, 150));
         this.resultLayer.addChild(labelContent);
 
-        var labelScore = cc.LabelTTF.create("最佳成绩：" + this.hillscore, "Arial", 25);
+        var labelScore = cc.LabelTTF.create("本次最佳成绩：" + this.hillscore, "Arial", 25);
         labelScore.setColor(cc.color(244, 9, 68));
         labelScore.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(0, -30)));
         this.resultLayer.addChild(labelScore);
@@ -301,6 +358,7 @@ var gameLayer = cc.Layer.extend({
     restartGame: function () {
         cc.director.runScene(new gameScene(true));
         share(0);
+        $('#gamestate').css({display: "block"});
     },
     onExit: function () {
         this._super();
@@ -317,6 +375,7 @@ var gameScene = cc.Scene.extend({
         this._super();
         var layer = new gameLayer(this.status);
         this.addChild(layer);
+        
     }
 });
 var tools = {};
@@ -340,22 +399,7 @@ function share(m, num) {
     }
 }
 
-// //提交服务器socket.io.js
-// var url = '127.0.0:8888';
-
-
-// var socket = io.connect(url,{transports:['websocket']});
-// socket.on('open',function(){
-// console.log("asdfasdfsdf");
-// });
 
 
 
-var opts = {path:"/socket"};
- var socket = io(opts);
 
-  socket.emit('username', "kaishile");
-
-  socket.on('moving', function (data) {
-    console.log(data);
-  });

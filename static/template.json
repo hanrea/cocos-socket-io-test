@@ -4,7 +4,7 @@
         "startTitle": {
             "type": "DIRECTDATA",
             "desc": "开始游戏之前的标题",
-            "value": "抢粽子大赛",
+            "value": "端午节抢粽子大赛",
             "name": "startTitle"
         },
         "startContent": {
@@ -145,9 +145,9 @@
     "share": {
         "wechat": {
             "appId": "",
-            "imgUrl": "icon.png",
-            "desc": "端午节快到了，赶紧过来抢粽子吧",
-            "title": "端午节抢粽子大赛"
+            "imgUrl": "/arron.png",
+            "desc": "安仁科技  端午节抢粽子大赛,抢多少给多少",
+            "title": "端午节抢粽子大赛【安仁科技】"
         }
     }
 }
